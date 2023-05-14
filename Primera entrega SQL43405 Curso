@@ -1,0 +1,67 @@
+CREATE SCHEMA Papel_Boligoma_Papel;
+USE Papel_Boligoma_papel;
+-- Drop table para borrar
+
+
+-- Crear tabla "Proveedores"
+CREATE TABLE Proveedores (
+  Id_Proveedores INT PRIMARY KEY,
+     Nombre_Empresa VARCHAR(45),
+    Cantidad_Material VARCHAR(45),
+    Valor_Total VARCHAR(45),
+    Fecha_de_compra date,
+    E_mail VARCHAR(45)
+);
+
+-- Crear tabla "Productos"
+CREATE TABLE Productos (
+  Id_Producto INT PRIMARY KEY,
+  Nombre_producto VARCHAR(100),
+  Valor DECIMAL(10, 2),
+  Marca VARCHAR(45),
+  Veces_Comprado int,
+  Id_Proveedores INT,
+  FOREIGN KEY (Id_Proveedores) REFERENCES Proveedores(Id_Proveedores)
+);
+
+-- Crear tabla "Trabajadores"
+CREATE TABLE Trabajadores (
+  Id_Trabajadores INT PRIMARY KEY,
+  Nombre_Apellido VARCHAR(100),
+  Clientes_Atendidos Varchar(45),
+  Dias_Trabajados INT,
+  Id_Cliente INT,
+  FOREIGN KEY (Id_Cliente) REFERENCES Cliente(Id_Cliente)
+);
+
+
+
+
+-- Crear tabla "Cliente"
+CREATE TABLE Cliente (
+  Id_Cliente INT PRIMARY KEY,
+  Nombre_Apellido VARCHAR(90),
+  DNI VARCHAR(45),
+  Metodo_De_Pago VARCHAR(45),
+
+  Id_Producto int, 
+  foreign key(Id_Producto) references Productos(Id_Producto)
+);
+--	adicion de dos tablas
+  ALTER TABLE cliente 
+  ADD Fecha_De_Compra DATE,
+  ADD Veces_Comprado INT;
+
+CREATE TABLE Ventas ( 
+Id_Ventas INT PRIMARY KEY,
+Ventas_Totales INT,
+Compras_Totales Int,
+Id_Proveedores int,
+foreign key (Id_Proveedores) References proveedores(id_proveedores),
+Id_Clientes int,
+foreign key (Id_Clientes) references cliente(Id_Cliente),
+Id_Trabajadores int,
+foreign key(Id_Trabajadores) references trabajadores(Id_Trabajadores)
+
+);
+
